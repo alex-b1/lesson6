@@ -50,6 +50,6 @@ class Station
 
   def validate!
     raise 'Неверное значение' if name.empty?
-    raise 'Такая станция уже есть' unless @@instances[name].nil?
+    raise 'Такая станция уже есть' if @@instances[name]
   end
 end

@@ -4,15 +4,11 @@ class Route
   include InstanceCounter
 
   @@instances = {}
-  attr_reader :initial_station, :end_station, :stations, :route_name
+  attr_reader :stations, :route_name
 
   def initialize(initial_station, end_station)
-    @initial_station = initial_station
-    @end_station = end_station
-    validate!
     @stations = [initial_station, end_station]
     @route_name = @stations[0].name.to_s + '-' + @stations[1].name.to_s
-    validate!
     @@instances[@route_name] = self
 
     register_instance
@@ -38,14 +34,6 @@ class Route
   end
 
   private
-
-  def validate!
-    stations = Station.all
-    station1 = stations[initial_station.name]
-    station2 = stations[end_station.name]
-
-    raise 'Неверное значение' if !(station1 && station2 && (station1 != station2)) || !@@instances[@route_name].nil?
-  end
 
   def validate_station?(station)
     @stations.find { |i| i[:name] == station[:name]}

@@ -18,7 +18,7 @@ class Train
     @carriages = [].concat(options[:carriages])
     @speed = 0
     @@instances[@number] = self
-    puts register_instance
+    register_instance
   end
 
   def accelerate(speed = 10)
